@@ -28,7 +28,7 @@ const customers = [
         email : 'syrupbottoms@gmail.com',
         age : 89
     }
-]
+];
 
 // Customer Type, defining fields for data
 const CustomerType = new GraphQLObjectType({
@@ -42,13 +42,26 @@ const CustomerType = new GraphQLObjectType({
 });
 
 // Root Query
+// resolve fetched customer by ID, using for loop on account of hardcoded data
 const RootQuery = new GraphQLObjectType({
     name : 'RootQueryType',
-    customer : {
-        type : CustomerType
+    fields : {
+        customer : {
+            type : CustomerType,
+            args : {
+                id : {type: GraphQLString},
+            },
+            resolve(parentValue, args) {
+                for (let i = 0; i < customers.length; i++) {
+                    if (customers[i].id === args.id) {
+                        return customers[i];
+                    }
+                }
+            }
+        }
     }
 });
 
 module.exports = new GraphQLSchema({
-
+    query : RootQuery
 });
