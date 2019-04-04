@@ -4,7 +4,7 @@
   "description": "Practice building a JSON-Server with GraphQL and Node.js/Express.js with CRUD functionality.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
